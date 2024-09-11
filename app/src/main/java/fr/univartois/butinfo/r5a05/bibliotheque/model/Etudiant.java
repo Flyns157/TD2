@@ -1,47 +1,46 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Etudiant {
     private String nom;
     private String prenom;
     private String numeroEtudiant;
     private String email;
-    private List<Emprunt> emprunts;
 
     public Etudiant(String nom, String prenom, String numeroEtudiant, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.numeroEtudiant = numeroEtudiant;
         this.email = email;
-        this.emprunts = new ArrayList<>();
     }
 
-    public void inscrire(String nom, String prenom, String numeroEtudiant, String email) {
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getNumeroEtudiant() {
+        return numeroEtudiant;
+    }
+
+    public void setNumeroEtudiant(String numeroEtudiant) {
         this.numeroEtudiant = numeroEtudiant;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void emprunterLivre(Livre livre) {
-        Emprunt emprunt = new Emprunt(livre, this);
-        emprunts.add(emprunt);
-        livre.marquerIndisponible();
-    }
-
-    public void retournerLivre(Livre livre) {
-        for (Emprunt emprunt : emprunts) {
-            if (emprunt.getLivre().equals(livre) && emprunt.getDateRetour() == null) {
-                emprunt.enregistrerRetour();
-                livre.marquerDisponible();
-                break;
-            }
-        }
-    }
-
-    public List<Emprunt> getHistoriqueEmprunts() {
-        return emprunts;
     }
 }

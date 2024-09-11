@@ -1,43 +1,66 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
-
 public class Livre {
     private String titre;
     private String auteur;
     private int anneePublication;
-    private String ISBN;
+    private String isbn;
     private String categorie;
     private boolean disponible;
 
-    public Livre(String titre, String auteur, int anneePublication, String ISBN, String categorie) {
+    public Livre(String titre, String auteur, int anneePublication, String isbn, String categorie) {
         this.titre = titre;
         this.auteur = auteur;
         this.anneePublication = anneePublication;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.categorie = categorie;
         this.disponible = true;
     }
 
-    public String getDetails() {
-        return titre + ", " + auteur + ", " + anneePublication + ", " + ISBN + ", " + categorie;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setDetails(String titre, String auteur, int anneePublication, String ISBN, String categorie) {
+    public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(String auteur) {
         this.auteur = auteur;
+    }
+
+    public int getAnneePublication() {
+        return anneePublication;
+    }
+
+    public void setAnneePublication(int anneePublication) {
         this.anneePublication = anneePublication;
-        this.ISBN = ISBN;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 
-    public void marquerIndisponible() {
-        this.disponible = false;
-    }
-
-    public void marquerDisponible() {
-        this.disponible = true;
-    }
-
-    public boolean estDisponible() {
+    public boolean isDisponible() {
         return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }

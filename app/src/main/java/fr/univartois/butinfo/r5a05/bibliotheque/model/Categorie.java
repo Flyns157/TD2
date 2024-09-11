@@ -1,26 +1,13 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 public class Categorie {
-    private String nom;
-    private List<Livre> listeLivres;
+    private static final List<String> categories = Arrays.asList(
+        "Littérature", "Sciences", "Histoire", "Informatique", "Arts", "Philosophie", "Économie", "Droit"
+    );
 
-    public Categorie(String nom) {
-        this.nom = nom;
-        this.listeLivres = new ArrayList<>();
-    }
-
-    public void ajouterLivre(Livre livre) {
-        listeLivres.add(livre);
-    }
-
-    public void supprimerLivre(Livre livre) {
-        listeLivres.remove(livre);
-    }
-
-    public List<Livre> getLivres() {
-        return listeLivres;
+    public static List<String> getCategories() {
+        return categories;
     }
 }

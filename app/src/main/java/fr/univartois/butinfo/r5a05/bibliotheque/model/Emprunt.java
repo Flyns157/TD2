@@ -8,22 +8,37 @@ public class Emprunt {
     private Date dateEmprunt;
     private Date dateRetour;
 
-    public Emprunt(Livre livre, Etudiant etudiant) {
+    public Emprunt(Livre livre, Etudiant etudiant, Date dateEmprunt) {
         this.livre = livre;
         this.etudiant = etudiant;
-        this.dateEmprunt = new Date();
-        this.dateRetour = null;
-    }
-
-    public void enregistrerRetour() {
-        this.dateRetour = new Date();
+        this.dateEmprunt = dateEmprunt;
+        this.dateRetour = null; // le livre n'est pas encore retourné
     }
 
     public Livre getLivre() {
         return livre;
     }
 
+    public Etudiant getEtudiant() {
+        return etudiant;
+    }
+
+    public Date getDateEmprunt() {
+        return dateEmprunt;
+    }
+
     public Date getDateRetour() {
         return dateRetour;
+    }
+
+    public void enregistrerRetour(Date dateRetour) {
+        this.dateRetour = dateRetour;
+        this.livre.setDisponible(true); // le livre devient disponible à nouveau
+    }
+
+    public boolean estEnRetard(Date dateActuelle) {
+        // Suppose que la durée maximale d'emprunt est de 30 jours
+        long difference = dateActuelle.getTime() - dateEmprunt.getTime();
+        return difference > (30L * 24 * 60 * 60 * 1000);
     }
 }
