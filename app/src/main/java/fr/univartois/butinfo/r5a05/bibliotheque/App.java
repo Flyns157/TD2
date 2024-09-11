@@ -18,9 +18,9 @@ public class App {
         boolean running = true;
         while (running) {
             afficherMenu();
-            int choix = scanner.nextInt();
-            scanner.nextLine(); // Consommer la ligne vide
-
+            int choix = lireEntierDepuisConsole(); // Utiliser une méthode sécurisée pour lire un entier
+            scanner.nextLine(); // Consommer la ligne vide après avoir lu un entier
+    
             switch (choix) {
                 case 1:
                     ajouterLivre();
@@ -55,6 +55,17 @@ public class App {
                     break;
                 default:
                     System.out.println("Choix non valide, veuillez réessayer.");
+            }
+        }
+    }
+    
+    private static int lireEntierDepuisConsole() {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Veuillez entrer un nombre entier valide.");
+                scanner.nextLine(); // Nettoyer l'entrée incorrecte
             }
         }
     }
