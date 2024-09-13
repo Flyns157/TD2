@@ -7,7 +7,8 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    application
+    // application
+    java
     id("io.spring.dependency-management") version "1.1.6"
     id("org.springframework.boot") version "3.3.3"
 }
@@ -36,14 +37,14 @@ java {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = "fr.univartois.butinfo.r5a05.bibliotheque.App"
-}
+// application {
+//     // Define the main class for the application.
+//     // mainClass = "fr.univartois.butinfo.r5a05.bibliotheque.App"
+// }
 
-tasks.named<JavaExec>("run") {
-    standardInput = System.`in`
-}
+// tasks.named<JavaExec>("run") {
+//     standardInput = System.`in`
+// }
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
