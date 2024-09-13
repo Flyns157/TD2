@@ -3,6 +3,7 @@ package fr.univartois.butinfo.r5a05.bibliotheque.model;
 import java.util.Date;
 
 public class Emprunt {
+    // private static final ... max_duree_emprunt = 15d;
     private Livre livre;
     private Etudiant etudiant;
     private Date dateEmprunt;

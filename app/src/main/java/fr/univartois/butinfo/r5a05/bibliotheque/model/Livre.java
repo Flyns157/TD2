@@ -1,11 +1,12 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
+
 public class Livre {
     private String titre;
     private String auteur;
     private int anneePublication;
     private String isbn;
     private String categorie;
-    private boolean disponible;
+    private boolean disponible = true;
 
     public Livre(String titre, String auteur, int anneePublication, String isbn, String categorie) {
         this.titre = titre;
