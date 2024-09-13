@@ -2,8 +2,14 @@ package fr.univartois.butinfo.r5a05.bibliotheque.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import fr.univartois.butinfo.r5a05.bibliotheque.model.Emprunt;
+import fr.univartois.butinfo.r5a05.bibliotheque.model.Etudiant;
+import fr.univartois.butinfo.r5a05.bibliotheque.model.Livre;
+import fr.univartois.butinfo.r5a05.bibliotheque.services.BibliothequeService;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/bibliotheque")
