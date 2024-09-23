@@ -1,0 +1,20 @@
+meta {
+  name: birth it
+  type: http
+  seq: 15
+}
+
+post {
+  url: http://localhost:8080/api/bibliotheque/etudiants
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nom": "John",
+    "prenom": "Doe",
+    "numeroEtudiant": "E123",
+    "email": "john.doe@example.com"
+  }
+}

@@ -1,0 +1,22 @@
+meta {
+  name: change that page 2
+  type: http
+  seq: 17
+}
+
+put {
+  url: http://localhost:8080/api/bibliotheque/livres/1234
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "titre": "Livre 1",
+      "auteur": "Auteur 1",
+      "anneePublication": 2020,
+      "isbn": "1234",
+      "categorie": "Littérature",
+      "disponible": true
+    }
+}

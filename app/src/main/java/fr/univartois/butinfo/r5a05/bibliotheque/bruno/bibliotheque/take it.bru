@@ -1,0 +1,16 @@
+meta {
+  name: take it
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:8080/api/bibliotheque/emprunter?isbn=1234&numeroEtudiant=E123
+  body: none
+  auth: none
+}
+
+params:query {
+  isbn: 1234
+  numeroEtudiant: E123
+}

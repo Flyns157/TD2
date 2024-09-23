@@ -18,7 +18,7 @@ public class BibliothequeService {
     private List<Livre> livres = new ArrayList<>();
     private List<Etudiant> etudiants = new ArrayList<>();
     private List<Emprunt> empruntsEnCours = new ArrayList<>();
-    private List<Emprunt> emprunts;
+    private List<Emprunt> emprunts = new ArrayList<>();
     private static final int DUREE_MAX_EMPRUNT_JOURS = 30; // Durée maximale d'emprunt en jours
 
     public BibliothequeService() {

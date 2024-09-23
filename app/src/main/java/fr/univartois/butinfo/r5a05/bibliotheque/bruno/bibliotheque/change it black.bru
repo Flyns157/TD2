@@ -1,0 +1,19 @@
+meta {
+  name: change it black
+  type: http
+  seq: 18
+}
+
+put {
+  url: http://localhost:8080/api/bibliotheque/etudiants/E123
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nom": "banana",
+    "prenom": "Doe",
+    "email": "banana.doe@example.com"
+  }
+}
