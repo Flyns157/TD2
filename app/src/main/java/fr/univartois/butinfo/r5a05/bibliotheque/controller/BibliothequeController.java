@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import javax.validation.Valid;
 
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Emprunt;
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Etudiant;
