@@ -2,7 +2,6 @@
 type: TD
 number: 2
 ---
-
 # Initiation au *framework* *Spring* et à *JPA*
 
 *Jakarta EE* (anciennement *Java EE* ou *J2EE* pour *Java 2 Platform, Enterprise
@@ -48,7 +47,6 @@ dispose des dépendances nécessaires.
    ```kotlin
    implementation("org.springframework.boot:spring-boot-starter-web")
    ```
-
 2. Afin de tester votre application, ajoutez dans votre paquetage le code de la
    classe donnée ci-dessous :
 
@@ -74,7 +72,6 @@ dispose des dépendances nécessaires.
 
    }
    ```
-
 3. D'après vous, à quoi servent :
 
    - L'annotation `RestController` ?
@@ -83,13 +80,11 @@ dispose des dépendances nécessaires.
    - L'annotation `RequestParam` ?
    - Le paramètre `value` ?
    - Le paramètre `defaultValue` ?
-
 4. Pour démarrer votre application, exécutez la commande suivante :
 
    ```
    gradle bootRun
    ```
-
 5. Consultez dans votre navigateur préféré la page web à l'adresse
    [http://localhost:8080/hello](http://localhost:8080/hello).
    Qu'affiche cette page ?
@@ -114,11 +109,9 @@ attendu en utilisant [*Bruno*](https://www.usebruno.com).
 6. Définissez un nouveau contrôleur pour votre application, qui aura pour
    rôle de fournir les routes nécessaires à la gestion de la bibliothèque.
    Il s'agit d'une nouvelle classe annotée avec `@RestController`.
-
 7. Complétez cette nouvelle classe pour qu'elle ait un attribut de type
    `Bibliotheque` (ou équivalent), que vous initialiserez avec quelques livres
    et quelques étudiants.
-
 8. En vous inspirant de la classe d'exemple fournie plus haut, proposez des
    routes permettant de retourner :
 
@@ -131,36 +124,29 @@ attendu en utilisant [*Bruno*](https://www.usebruno.com).
    - les informations d'un livre donné par son ISBN ;
    - les informations d'un étudiant donné par son numéro d'étudiant ;
    - l'ensemble des livres empruntés par un étudiant donné.
-
 9. Proposez une route pour afficher tous les livres publiés une année donnée.
    Comment faire pour récupérer cette valeur sous la forme d'un `int` ?
-
 10. Proposez une route permettant de supprimer un livre donné par son ISBN.
     Quelle méthode HTTP devez-vous utiliser pour cela ?
     Comment faire pour indiquer que vous souhaitez utiliser cette méthode ?
     Faites de même pour supprimer un étudiant donné par son numéro d'étudiant.
-
 11. Proposez une route permettant d'enregistrer l'emprunt d'un livre donné par
     son ISBN par un étudiant donné par son numéro d'étudiant.
     Quelle méthode HTTP devez-vous utiliser pour cela ?
     Comment faire pour indiquer que vous souhaitez utiliser cette méthode ?
-
 12. Proposez une route permettant d'enregistrer le retour d'un livre
     préalablement emprunté.
-
 13. Proposez une route permettant de créer un nouveau livre, en fournissant
     toutes les informations nécessaire en paramètres de la requête.
     Quelle méthode HTTP devez-vous utiliser pour cela ?
     Comment faire pour indiquer que vous souhaitez utiliser cette méthode ?
     Faites de même pour créer un nouvel étudiant.
-
 14. Proposez maintenant une route permettant la mise à jour des informations
     relatives à un livre donné par son ISBN.
     Quelle méthode HTTP devez-vous utiliser pour cela ?
     Comment faire pour indiquer que vous souhaitez utiliser cette méthode ?
     Faites de même pour mettre à jour les informations d'un étudiant donné par
     son numéro d'étudiant.
-
 15. Dans cette application, quelles classes constituent le modèle ?
     La vue ?
     Le contrôleur ?
@@ -179,23 +165,22 @@ format de manière transparente.
     les paramètres depuis son URL.
 
     a. Modifiez votre méthode permettant de mettre à jour livres et étudiants en
-       utilisant `@RequestBody`.
-       Comme vous ne savez pas quels seront les éventuels paramètres de cette
-       requête, utilisez une `Map<String, Object>` comme paramètre de la méthode
-       pour pouvoir les récupérer de manière « brute ».
-       Assurez-vous ensuite que votre application fonctionne toujours comme
-       prévu.
+    utilisant `@RequestBody`.
+    Comme vous ne savez pas quels seront les éventuels paramètres de cette
+    requête, utilisez une `Map<String, Object>` comme paramètre de la méthode
+    pour pouvoir les récupérer de manière « brute ».
+    Assurez-vous ensuite que votre application fonctionne toujours comme
+    prévu.
 
     b. Modifiez votre méthode permettant de créer un nouveau livre ou un nouvel
-       étudiant.
-       Cette fois, vous avez besoin de tous les attributs de la personne pour
-       la créer : vous pouvez donc directement utiliser vos objets comme
-       paramètre de la méthode.
-       *Spring* fera automatiquement le *mapping* entre les clefs du JSON et
-       les attributs de vos classes.
-       Assurez-vous ensuite que votre application fonctionne toujours comme
-       prévu.
-
+    étudiant.
+    Cette fois, vous avez besoin de tous les attributs de la personne pour
+    la créer : vous pouvez donc directement utiliser vos objets comme
+    paramètre de la méthode.
+    *Spring* fera automatiquement le *mapping* entre les clefs du JSON et
+    les attributs de vos classes.
+    Assurez-vous ensuite que votre application fonctionne toujours comme
+    prévu.
 17. L'annotation `@ResponseBody` permet de réaliser le processus inverse.
     Plutôt que d'envoyer vos réponses sous la forme de chaînes de caractères,
     vous pouvez directement renvoyer des objets *Java* au format JSON.
@@ -222,7 +207,6 @@ respecte les bonnes pratiques du protocole HTTP et des API REST.
     exemple, `/bibliotheque`).
     Assurez-vous ensuite que votre application fonctionne toujours comme
     prévu.
-
 19. Lorsque vous renvoyez une réponse, vous devez normalement aussi retourner
     un code de retour HTTP.
     Par défaut, c'est le code `200 OK` qui est retourné, mais ce n'est pas
@@ -233,7 +217,6 @@ respecte les bonnes pratiques du protocole HTTP et des API REST.
     `@ResponseStatus(HttpStatus.CREATED)`.
     Assurez-vous ensuite que votre application fonctionne toujours comme
     prévu.
-
 20. Les codes de retour précisés à la question précédente sont ceux
     correspondants aux cas où la requête s'est bien passée.
     Lorsque ce n'est pas le cas (par exemple, lorsqu'une personne n'est pas
@@ -262,7 +245,6 @@ reste le même pour toutes les bases de données SQL.
     runtimeOnly("org.xerial:sqlite-jdbc")
     runtimeOnly("org.hibernate.orm:hibernate-community-dialects")
     ```
-
 22. Pour indiquer à *Spring* comment accéder à la base de données, il faut
     configurer ces informations dans le fichier `application.properties`, que
     vous devez placer dans le dossier `src/main/resources` (ou éventuellement
@@ -299,22 +281,18 @@ bibliothèque.
     la table associée à l'entité dans la base de données.
     Vous pouvez lui donner le nom que vous souhaitez (*Spring* la créera pour
     vous).
-
 24. Ajoutez dans cette classe un attribut numérique représentant l'identifiant
     de l'objet dans la base.
     Vous devrez l'annoter avec `@Id` (pour indiquer qu'il s'agit d'une clef
     primaire) et `@GeneratedValue(strategy = GenerationType.IDENTITY)` pour
     que cette valeur soit automatiquement générée.
-
 25. Ajoutez l'annotation `@Enumerated` sur les attributs dont le type est une
     énumération.
     Spécifiez en paramètre soit `EnumType.ORDINAL`, soit `EnumType.STRING`,
     suivant que vous souhaitez que la valeur de l'énumération soit stockée dans
     la base sous la forme d'un entier ou d'une chaîne de caractères.
-
 26. Comment faire pour établir le lien entre un étudiant et les livres qu'il
     a empruntés ?
-
 27. Si ce n'est pas déjà fait, assurez-vous d'avoir des *getters* et des
     *setters* pour chacun des attributs.
 
@@ -331,17 +309,14 @@ définir un.
     de l'objet (celui choisi à la question 24).
     **ATTENTION : Vous devez bien définir une *interface* ici, vous ne devez pas
     implémenter `JpaRepository`.**
-
 29. Consultez la *javadoc* de `JpaRepository` pour regarder les différentes
     méthodes fournies par cette interface.
-
 30. Définissez une méthode permettant de rechercher un livre par son ISBN.
     Cette méthode doit impérativement retourner un objet de type `Livre`,
     et s'appeler `findByIsbn()` si l'attribut correspondant à l'ISBN s'appelle
     `isbn`.
     **Cette méthode sera automatiquement implémentée par *Spring*, vous devez
     donc faire attention à bien respecter les conventions de nommage.**
-
 31. Faites de même avec l'entité représentant les étudiants.
 
 ## Définition d'un *service*
@@ -360,7 +335,6 @@ l'utilisateur, de leur transformation, de l'accès à la base de données *via* 
     l'initialiser.
     Ce constructeur sera automatiquement appelé par *Spring*, vous devez donc
     veiller à le définir correctement.
-
 33. Définissez une méthode permettant de créer un livre dans la base de données.
     Une telle méthode pourrait avoir l'allure suivante :
 
@@ -369,9 +343,7 @@ l'utilisateur, de leur transformation, de l'accès à la base de données *via* 
         return livreRepository.save(livre);
     }
     ```
-
 34. Faites de même pour définir un service permettant de gérer les étudiants.
-
 
 ## Adaptation du contrôleur
 
@@ -386,11 +358,9 @@ pour extraire des informations de la requête reçue.
     initialiser.
     Ce constructeur sera automatiquement appelé par *Spring*, vous devez donc
     veiller à le définir correctement.
-
 36. Modifiez les méthodes associées aux différentes routes pour qu'elles
     utilisent maintenant le service plutôt que l'attribut de type
     `Bibliotheque`.
-
 37. Lancez votre application, et essayez de nouveau les différentes
     fontionnalités qu'elle offre.
     Que se passe-t-il si vous relancez à nouveau l'application ?
@@ -409,3 +379,5 @@ décrites ci-dessous : à vous de les retrouver !
     le bon format).
     Comment pourriez-vous faire pour valider les données saisies ?
 
+
+*utile: gradle bootrun*
