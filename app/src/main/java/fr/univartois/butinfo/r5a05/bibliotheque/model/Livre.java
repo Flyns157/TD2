@@ -16,6 +16,8 @@ public class Livre {
     @NotBlank(message = "La catégorie ne peut pas être vide")
     private String categorie;
 
+    
+    private String isbn;
     private boolean disponible = true;
 
     public Livre(String titre, String auteur, int anneePublication, String isbn, String categorie) {

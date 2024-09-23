@@ -40,8 +40,8 @@ public class BibliothequeController {
     }
 
     // Route pour retourner les livres disponibles
-    @Operation(summary = "Obtenir tous les livres disponibles")
-    @ApiResponse(responseCode = "200", description = "Succès")
+    // @Operation(summary = "Obtenir tous les livres disponibles")
+    // @ApiResponse(responseCode = "200", description = "Succès")
     @GetMapping("/livres/disponibles")
     @ResponseStatus(HttpStatus.OK)
     public List<Livre> getLivresDisponibles() {

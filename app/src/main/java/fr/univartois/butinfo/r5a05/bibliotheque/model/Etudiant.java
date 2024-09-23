@@ -5,22 +5,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class Etudiant {
+    @NotBlank(message = "Le nom ne peut pas être vide")
     private String nom;
+
+    @NotBlank(message = "Le prénom ne peut pas être vide")
     private String prenom;
-    private String numeroEtudiant;
+
+    @Email(message = "Adresse e-mail invalide")
+    @NotBlank(message = "L'email ne peut pas être vide")
     private String email;
 
+    private String numeroEtudiant;
+
     public Etudiant(String nom, String prenom, String numeroEtudiant, String email) {
-        @NotBlank(message = "Le nom ne peut pas être vide")
         this.nom = nom;
-
-        @NotBlank(message = "Le prénom ne peut pas être vide")
         this.prenom = prenom;
-
-        @Email(message = "Adresse e-mail invalide")
-        @NotBlank(message = "L'email ne peut pas être vide")
         this.email = email;
-
         this.numeroEtudiant = numeroEtudiant;
     }
 
