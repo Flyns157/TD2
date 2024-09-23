@@ -2,22 +2,28 @@ package fr.univartois.butinfo.r5a05.bibliotheque.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.FutureOrPresent;
+
 
 public class Livre {
-    @NotBlank(message = "Le titre ne peut pas être vide")
+    @NotBlank(message = "Le titre du livre est obligatoire")
+    @Size(min = 1, max = 100, message = "Le titre doit avoir entre 1 et 100 caractères")
     private String titre;
 
-    @NotBlank(message = "Le nom de l'auteur ne peut pas être vide")
+    @NotBlank(message = "Le nom de l'auteur est obligatoire")
+    @Size(min = 1, max = 100, message = "Le nom de l'auteur doit avoir entre 1 et 100 caractères")
     private String auteur;
 
-    @Size(min = 4, max = 4, message = "L'année de publication doit être au format AAAA")
-    private String anneePublication;
+    @FutureOrPresent(message = "L'année de publication doit être inférieure ou égale à l'année actuelle")
+    private int anneePublication;
 
-    @NotBlank(message = "La catégorie ne peut pas être vide")
+    @NotBlank(message = "L'ISBN est obligatoire")
+    @Size(min = 4, max = 13, message = "L'ISBN doit avoir entre 4 et 13 caractères")
+    private String isbn;
+
+    @NotBlank(message = "La catégorie du livre est obligatoire")
     private String categorie;
 
-    
-    private String isbn;
     private boolean disponible = true;
 
     public Livre(String titre, String auteur, int anneePublication, String isbn, String categorie) {
