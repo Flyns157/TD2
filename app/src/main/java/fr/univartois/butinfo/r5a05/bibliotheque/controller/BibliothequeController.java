@@ -2,6 +2,7 @@ package fr.univartois.butinfo.r5a05.bibliotheque.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Emprunt;
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Etudiant;
@@ -68,20 +69,28 @@ public class BibliothequeController {
     @GetMapping("/livres/{isbn}")
     @ResponseStatus(HttpStatus.OK)
     public Livre getLivreByIsbn(@PathVariable String isbn) {
-        return bibliothequeService.getLivreByIsbn(isbn).orElse(null);
+        return bibliothequeService.getLivreByIsbn(isbn)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn));
     }
 
     // Route pour retourner un étudiant par numéro d'étudiant
     @GetMapping("/etudiants/{numeroEtudiant}")
     @ResponseStatus(HttpStatus.OK)
     public Etudiant getEtudiantByNumero(@PathVariable String numeroEtudiant) {
-        return bibliothequeService.getEtudiantByNumero(numeroEtudiant).orElse(null);
+        return bibliothequeService.getEtudiantByNumero(numeroEtudiant)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Étudiant non trouvé avec numéro: " + numeroEtudiant));
     }
 
     // Route pour emprunter un livre
     @PostMapping("/emprunter")
     @ResponseStatus(HttpStatus.OK)
     public void emprunterLivre(@RequestParam String numeroEtudiant, @RequestParam String isbn) {
+        if (!bibliothequeService.getEtudiantByNumero(numeroEtudiant).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Étudiant non trouvé avec numéro: " + numeroEtudiant);
+        }
+        if (!bibliothequeService.getLivreByIsbn(isbn).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn);
+        }
         bibliothequeService.emprunterLivre(numeroEtudiant, isbn);
     }
 
@@ -89,6 +98,9 @@ public class BibliothequeController {
     @PostMapping("/retourner/{isbn}")
     @ResponseStatus(HttpStatus.OK)
     public void retournerLivre(@PathVariable String isbn) {
+        if (!bibliothequeService.getLivreByIsbn(isbn).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn);
+        }
         bibliothequeService.retournerLivre(isbn);
     }
 
@@ -96,6 +108,9 @@ public class BibliothequeController {
     @DeleteMapping("/livres/{isbn}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void supprimerLivre(@PathVariable String isbn) {
+        if (!bibliothequeService.getLivreByIsbn(isbn).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn);
+        }
         bibliothequeService.supprimerLivre(isbn);
     }
 
@@ -103,6 +118,9 @@ public class BibliothequeController {
     @DeleteMapping("/etudiants/{numeroEtudiant}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void supprimerEtudiant(@PathVariable String numeroEtudiant) {
+        if (!bibliothequeService.getEtudiantByNumero(numeroEtudiant).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Étudiant non trouvé avec numéro: " + numeroEtudiant);
+        }
         bibliothequeService.supprimerEtudiant(numeroEtudiant);
     }
 
@@ -124,32 +142,26 @@ public class BibliothequeController {
     @PutMapping("/livres/{isbn}")
     @ResponseStatus(HttpStatus.OK)
     public void mettreAJourLivre(@PathVariable String isbn, @RequestBody Livre livreDetails) {
-        Optional<Livre> livre = bibliothequeService.getLivreByIsbn(isbn);
-
-        if (livre.isPresent()) {
-            Livre livreExistant = livre.get();
-            livreExistant.setTitre(livreDetails.getTitre());
-            livreExistant.setAuteur(livreDetails.getAuteur());
-            livreExistant.setAnneePublication(livreDetails.getAnneePublication());
-            livreExistant.setCategorie(livreDetails.getCategorie());
-            livreExistant.setDisponible(livreDetails.isDisponible());
-            // Pas besoin d'ajouter le livre de nouveau, il est déjà dans la liste
-        }
+        Livre livreExistant = bibliothequeService.getLivreByIsbn(isbn)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn));
+        
+        livreExistant.setTitre(livreDetails.getTitre());
+        livreExistant.setAuteur(livreDetails.getAuteur());
+        livreExistant.setAnneePublication(livreDetails.getAnneePublication());
+        livreExistant.setCategorie(livreDetails.getCategorie());
+        livreExistant.setDisponible(livreDetails.isDisponible());
     }
 
     // Route pour mettre à jour un étudiant par son numéro d'étudiant
     @PutMapping("/etudiants/{numeroEtudiant}")
     @ResponseStatus(HttpStatus.OK)
     public void mettreAJourEtudiant(@PathVariable String numeroEtudiant, @RequestBody Etudiant etudiantDetails) {
-        Optional<Etudiant> etudiant = bibliothequeService.getEtudiantByNumero(numeroEtudiant);
+        Etudiant etudiantExistant = bibliothequeService.getEtudiantByNumero(numeroEtudiant)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Étudiant non trouvé avec numéro: " + numeroEtudiant));
 
-        if (etudiant.isPresent()) {
-            Etudiant etudiantExistant = etudiant.get();
-            etudiantExistant.setNom(etudiantDetails.getNom());
-            etudiantExistant.setPrenom(etudiantDetails.getPrenom());
-            etudiantExistant.setEmail(etudiantDetails.getEmail());
-            // Pas besoin d'ajouter l'étudiant de nouveau, il est déjà dans la liste
-        }
+        etudiantExistant.setNom(etudiantDetails.getNom());
+        etudiantExistant.setPrenom(etudiantDetails.getPrenom());
+        etudiantExistant.setEmail(etudiantDetails.getEmail());
     }
 
     // Route pour afficher tous les livres publiés une année donnée
