@@ -1,11 +1,21 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Livre {
+    @NotBlank(message = "Le titre ne peut pas être vide")
     private String titre;
+
+    @NotBlank(message = "Le nom de l'auteur ne peut pas être vide")
     private String auteur;
-    private int anneePublication;
-    private String isbn;
+
+    @Size(min = 4, max = 4, message = "L'année de publication doit être au format AAAA")
+    private String anneePublication;
+
+    @NotBlank(message = "La catégorie ne peut pas être vide")
     private String categorie;
+
     private boolean disponible = true;
 
     public Livre(String titre, String auteur, int anneePublication, String isbn, String categorie) {

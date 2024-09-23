@@ -28,6 +28,9 @@ dependencies {
     implementation(libs.guava)
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("javax.validation:validation-api:2.0.1.Final")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

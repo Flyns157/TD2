@@ -1,4 +1,9 @@
 package fr.univartois.butinfo.r5a05.bibliotheque.model;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Etudiant {
     private String nom;
     private String prenom;
@@ -6,10 +11,17 @@ public class Etudiant {
     private String email;
 
     public Etudiant(String nom, String prenom, String numeroEtudiant, String email) {
+        @NotBlank(message = "Le nom ne peut pas être vide")
         this.nom = nom;
+
+        @NotBlank(message = "Le prénom ne peut pas être vide")
         this.prenom = prenom;
-        this.numeroEtudiant = numeroEtudiant;
+
+        @Email(message = "Adresse e-mail invalide")
+        @NotBlank(message = "L'email ne peut pas être vide")
         this.email = email;
+
+        this.numeroEtudiant = numeroEtudiant;
     }
 
     public String getNom() {

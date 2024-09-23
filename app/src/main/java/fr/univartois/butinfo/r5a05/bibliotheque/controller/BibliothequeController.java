@@ -3,6 +3,8 @@ package fr.univartois.butinfo.r5a05.bibliotheque.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Emprunt;
 import fr.univartois.butinfo.r5a05.bibliotheque.model.Etudiant;
@@ -127,21 +129,21 @@ public class BibliothequeController {
     // Route pour créer un nouveau livre
     @PostMapping("/livres")
     @ResponseStatus(HttpStatus.CREATED)
-    public void ajouterLivre(@RequestBody Livre livre) {
+    public void ajouterLivre(@Valid @RequestBody Livre livre) {
         bibliothequeService.ajouterLivre(livre);
     }
 
     // Route pour créer un nouvel étudiant
     @PostMapping("/etudiants")
     @ResponseStatus(HttpStatus.CREATED)
-    public void ajouterEtudiant(@RequestBody Etudiant etudiant) {
+    public void ajouterEtudiant(@Valid @RequestBody Etudiant etudiant) {
         bibliothequeService.ajouterEtudiant(etudiant);
     }
 
     // Route pour mettre à jour un livre par son ISBN
     @PutMapping("/livres/{isbn}")
     @ResponseStatus(HttpStatus.OK)
-    public void mettreAJourLivre(@PathVariable String isbn, @RequestBody Livre livreDetails) {
+    public void mettreAJourLivre(@PathVariable String isbn,@Valid @RequestBody Livre livreDetails) {
         Livre livreExistant = bibliothequeService.getLivreByIsbn(isbn)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre non trouvé avec ISBN: " + isbn));
         
@@ -155,7 +157,7 @@ public class BibliothequeController {
     // Route pour mettre à jour un étudiant par son numéro d'étudiant
     @PutMapping("/etudiants/{numeroEtudiant}")
     @ResponseStatus(HttpStatus.OK)
-    public void mettreAJourEtudiant(@PathVariable String numeroEtudiant, @RequestBody Etudiant etudiantDetails) {
+    public void mettreAJourEtudiant(@PathVariable String numeroEtudiant,@Valid @RequestBody Etudiant etudiantDetails) {
         Etudiant etudiantExistant = bibliothequeService.getEtudiantByNumero(numeroEtudiant)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Étudiant non trouvé avec numéro: " + numeroEtudiant));
 
